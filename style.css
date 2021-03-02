@@ -119,6 +119,7 @@ body {
 
 .main-wrapper {
     width: 1000px;
+    display: flex;
 }
 
 .search {
@@ -159,24 +160,98 @@ body {
     width: 287px;
     height: 37px;
 }
-/* TEST BOY */
 
+.user-list {
+    padding-left: 30px;
+    
+    width: 100%;
+}
 
-/* .container {
-    margin: 0 auto;
-    width: 1010px;
+.users {
+    border-radius: 5px;
+    margin-top: 0px;
+    height: 122px;
     display: flex;
     flex-wrap: wrap;
 }
 
-.container__card {
-    width: 200px;
-    height: 150px;
-    margin: 5px;
-    border-radius: 10px;
-    background-color: rgb(248, 248, 248);
+
+.user-list__bar {
+    margin-bottom: 21px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.view-toggle {
+    width: 70px;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.view-toggle img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.view-toggle img:hover {
+    transform: scale(1.15);
+}
+
+.users__card {
+    width: 32.08%;
+    height: 250px;
+    margin-right: 7px;
+    margin-bottom: 7px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-} */
+}
+
+.users__personal-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.users__personal-info img {
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+}
+
+.users__personal-info h2 {
+    font-weight: 400;
+    font-size: 20pt;
+}
+
+.users__personal-info p {
+    font-size: 8pt;
+}
+
+.users__work-info {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10pt;
+}
+
+.users__department {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.users__room {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
