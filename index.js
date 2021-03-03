@@ -43,29 +43,51 @@ const userList = [
   },
 ];
 
-const userListBlock = document.getElementById('container');
-const searchBar = document.getElementById('searchBar');
-const userCounter = document.getElementById('user-counter');
+const userListBlock = document.getElementById("container");
+const searchBar = document.getElementById("searchBar");
+const userCounter = document.getElementById("user-counter");
+let searchString = "";
+let viewState = "grid";
 
-let viewState = 'grid'
+searchBar.addEventListener("keyup", (e) => {
+  searchString = e.target.value.toLowerCase();
+});
+
+searchBar.addEventListener("keydown", function (e) {
+  if (e.keyCode === 13) {
+    search();
+    event.preventDefault();
+  }
+});
+
+const search = () => {
+  const filteredUsers = userList.filter((user) => {
+    return (
+      user.name.toLowerCase().includes(searchString) ||
+      user.nativeName.toLowerCase().includes(searchString)
+    );
+  });
+  displayUsers(filteredUsers);
+};
 
 const gridView = () => {
-  viewState = 'grid'
-  displayUsers(userList)
-}
+  viewState = "grid";
+  displayUsers(userList);
+};
 
 const listView = () => {
-  viewState = 'list'
-  displayUsers(userList)
-}
+  viewState = "list";
+  displayUsers(userList);
+};
+
 const displayUsers = (data) => {
-    userListBlock.innerHTML =''
-    let counter = 0;
-    data.map((el) => {
-        counter++;
-        const row = document.createElement("div");
-        row.classList.add(`users__card-${viewState}`);
-        row.innerHTML = `
+  userListBlock.innerHTML = "";
+  let counter = 0;
+  data.map((el) => {
+    counter++;
+    const row = document.createElement("div");
+    row.classList.add(`users__card-${viewState}`);
+    row.innerHTML = `
           <div class="users__personal-info-${viewState}">
               <img src="./assets/user-list/${el.avatar}" alt="aleh">
               <h2>${el.name}</h2>
@@ -83,21 +105,9 @@ const displayUsers = (data) => {
               </div>
           </div>
           `;
-          userListBlock.appendChild(row);
-      });
-    userCounter.innerHTML = `${counter} employers displayed`
-      
-}
-
-searchBar.addEventListener('keypress', (e) => {
-  const searchString = e.target.value.toLowerCase();
-  const filteredUsers = userList.filter((user) => {
-      return (
-          user.name.toLowerCase().includes(searchString) ||
-          user.nativeName.toLowerCase().includes(searchString)
-      );
+    userListBlock.appendChild(row);
   });
-  displayUsers(filteredUsers);
-});
+  userCounter.innerHTML = `${counter} employers displayed`;
+};
 
-displayUsers(userList)
+displayUsers(userList);
