@@ -45,19 +45,33 @@ const userList = [
 
 const userListBlock = document.getElementById('container');
 const searchBar = document.getElementById('searchBar');
+const userCounter = document.getElementById('user-counter');
 
+let viewState = 'grid'
 
+const gridView = () => {
+  viewState = 'grid'
+  displayUsers(userList)
+}
+
+const listView = () => {
+  viewState = 'list'
+  displayUsers(userList)
+}
 const displayUsers = (data) => {
+    userListBlock.innerHTML =''
+    let counter = 0;
     data.map((el) => {
+        counter++;
         const row = document.createElement("div");
-        row.classList.add("users__card");
+        row.classList.add(`users__card-${viewState}`);
         row.innerHTML = `
-          <div class="users__personal-info">
+          <div class="users__personal-info-${viewState}">
               <img src="./assets/user-list/${el.avatar}" alt="aleh">
               <h2>${el.name}</h2>
               <p>${el.nativeName}</p>
           </div>
-          <div class="users__work-info">
+          <div class="users__work-info-${viewState}">
               <div class="users__department">
                   <img src="./assets/case.svg" alt="aleh">
                   ${el.department}
@@ -71,12 +85,11 @@ const displayUsers = (data) => {
           `;
           userListBlock.appendChild(row);
       });
+    userCounter.innerHTML = `${counter} employers displayed`
       
 }
 
 searchBar.addEventListener('keypress', (e) => {
-
-  userListBlock.innerHTML =''
   const searchString = e.target.value.toLowerCase();
   const filteredUsers = userList.filter((user) => {
       return (
@@ -85,8 +98,6 @@ searchBar.addEventListener('keypress', (e) => {
       );
   });
   displayUsers(filteredUsers);
-  
-    
 });
 
 displayUsers(userList)

@@ -56,12 +56,7 @@
                 </div>
 
                 <form class="search-form">
-                    <input 
-                        class="search-form__input" 
-                        placeholder="John Smith"
-                        id="searchBar"
-                        type="text"
-                    >
+                    <input class="search-form__input" placeholder="John Smith" id="searchBar" type="text">
                     <button class="search-form__button">SEARCH</button>
                 </form>
 
@@ -70,20 +65,37 @@
 
             <div class="user-list">
                 <div class="user-list__bar">
-                    <div class="user-list__info">
+                    <div id="user-counter" class="user-list__info">
                         6 employers displayed
                     </div>
                     <div class="view-toggle">
-                        <img src='./assets/grid.svg' alt="grid_view" />
-                        <img src='./assets/list.svg' alt="grid_view" />
+                        <img src='./assets/grid.svg' alt="grid_view" onclick="gridView()" />
+                        <img src='./assets/list.svg' alt="list_view" onclick="listView()" />
                     </div>
                 </div>
                 <div class="users" id="container">
-                    
+                    <div class="users__card-list">
+                        <div class="users__personal-info-list">
+                            <img src="./assets/user-list/aleh.jpg" alt="aleh">
+                            <h2>${el.name}</h2>
+                            <p>${el.nativeName}</p>
+                        </div>
+                        <div class="users__work-info-list">
+                            <div class="users__department">
+                                <img src="./assets/case.svg" alt="aleh">
+                                ${el.department}
+                            </div>
+
+                            <div class="users__room">
+                                <img src="./assets/door.svg" alt="aleh">
+                                ${el.room}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     </div>
