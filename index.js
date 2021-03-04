@@ -43,6 +43,8 @@ const userList = [
   },
 ];
 
+const enterKeyCode = 13;
+
 const userListBlock = document.getElementById("container");
 const searchBar = document.getElementById("searchBar");
 const userCounter = document.getElementById("user-counter");
@@ -50,14 +52,10 @@ let searchString = "";
 let viewState = "grid";
 
 searchBar.addEventListener("keyup", (e) => {
-  searchString = e.target.value.toLowerCase();
-});
-
-searchBar.addEventListener("keydown", function (e) {
-  if (e.keyCode === 13) {
+  if (e.keyCode === enterKeyCode) {
     search();
-    event.preventDefault();
-  }
+  } 
+  searchString = e.target.value.toLowerCase();
 });
 
 const search = () => {
@@ -81,33 +79,30 @@ const listView = () => {
 };
 
 const displayUsers = (data) => {
-  userListBlock.innerHTML = "";
-  let counter = 0;
-  data.map((el) => {
-    counter++;
-    const row = document.createElement("div");
-    row.classList.add(`users__card-${viewState}`);
-    row.innerHTML = `
-          <div class="users__personal-info-${viewState}">
-              <img src="./assets/user-list/${el.avatar}" alt="aleh">
-              <h2>${el.name}</h2>
-              <p>${el.nativeName}</p>
-          </div>
-          <div class="users__work-info-${viewState}">
-              <div class="users__department">
-                  <img src="./assets/case.svg" alt="aleh">
-                  ${el.department}
+  let newUserList = data.reduce((str, el) => {
+    return str +  `
+            <div class="users__card-${viewState}">
+              <div class="users__personal-info-${viewState}">
+                  <img src="./assets/user-list/${el.avatar}" alt="aleh">
+                  <h2>${el.name}</h2>
+                  <p>${el.nativeName}</p>
               </div>
-          
-              <div class="users__room">
-                  <img src="./assets/door.svg" alt="aleh">
-                  ${el.room}
-              </div>
-          </div>
-          `;
-    userListBlock.appendChild(row);
-  });
-  userCounter.innerHTML = `${counter} employers displayed`;
-};
+              <div class="users__work-info-${viewState}">
+                  <div class="users__department">
+                      <img src="./assets/case.svg" alt="aleh">
+                      ${el.department}
+                  </div>
 
+                  <div class="users__room">
+                      <img src="./assets/door.svg" alt="aleh">
+                      ${el.room}
+                  </div>
+              </div>
+            </div>
+          `;
+    
+  }, '');
+  userListBlock.innerHTML = newUserList;
+  userCounter.innerHTML = `${data.length} employers displayed`;
+};
 displayUsers(userList);
