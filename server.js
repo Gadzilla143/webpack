@@ -1,3 +1,8 @@
+const http = require('http');
+const url = require('url');
+const userController = require("./controllers/user.controller");
+
+
 const userList = [
   {
     name: "Dzmitry Antonenka",
@@ -43,21 +48,15 @@ const userList = [
   },
 ];
 
-const http = require("http");
 
 http
   .createServer((req, res) => {
-    switch (req.url) {
-      case "/":
-        res.end("///");
-        break;
-      case "/user_list":
-        res.end(JSON.stringify(userList));
-        break;
-      default:
-        res.end("///");
-    }
-
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
     
+        const queryObject = url.parse(req.url, true).query || '';
+        
+        const filteredUsers = userController.getUsers(userList, queryObject.filterBy);
+        res.end(JSON.stringify(filteredUsers));
   })
-  .listen(3000, () => console.log("Сервер работает"));
+  .listen(3000, '127.0.0.1');
