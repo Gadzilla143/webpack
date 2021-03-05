@@ -4,6 +4,7 @@ const userListBlock = document.getElementById("container");
 const searchBar = document.getElementById("searchBar");
 const userCounter = document.getElementById("user-counter");
 
+let sortState = 'name';
 let searchString = "";
 let viewState = "grid";
 let userList = ''
@@ -18,6 +19,7 @@ searchBar.addEventListener("keyup", (e) => {
 const getUsers = () => {
   const url = new URL("http://127.0.0.1:3000/user_list");
   url.searchParams.set("filterBy", searchString);
+  url.searchParams.set("sortBy", sortState);
   const request = new XMLHttpRequest();
   request.open("GET", url, true);
   request.setRequestHeader(
@@ -36,9 +38,14 @@ const getUsers = () => {
   request.send(this.responseText);
 };
 
-const gridView = () => {
-  viewState = "grid";
-  displayUsers(userList);
+const sortByName = () => {
+  sortState = "name";
+  getUsers();
+};
+
+const sortByNativeName = () => {
+  sortState = "nativeName";
+  getUsers();
 };
 
 const listView = () => {

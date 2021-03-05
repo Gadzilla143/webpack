@@ -59,14 +59,16 @@
                     <input class="search-form__input" placeholder="John Smith" id="searchBar" type="text">
                     <button onclick="getUsers()" type="button" class="search-form__button">SEARCH</button>
                 </div>
-
-
             </div>
 
             <div class="user-list">
                 <div class="user-list__bar">
                     <div id="user-counter" class="user-list__info">
-                        6 employers displayed
+                    </div>
+                    <div class="sort-toggle">
+                        <div>Sort by</div>
+                        <div class="sort-toggle__element" onclick="sortByName()">Name</div>
+                        <div class="sort-toggle__element" onclick="sortByNativeName()">Native Name</div>
                     </div>
                     <div class="view-toggle">
                         <img src='./assets/grid.svg' alt="grid_view" onclick="gridView()" />

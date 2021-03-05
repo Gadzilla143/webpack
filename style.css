@@ -185,8 +185,25 @@ body {
 .view-toggle {
     width: 70px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around;   
+}
+
+.sort-toggle {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
     
+}
+
+.sort-toggle__element {
+    border-bottom: 2px solid rgb(81, 152, 194);
+    transition: .2s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.sort-toggle__element:hover {
+    transform: scale(1.2);
 }
 
 .view-toggle img {
