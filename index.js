@@ -54,7 +54,7 @@ let viewState = "grid";
 searchBar.addEventListener("keyup", (e) => {
   if (e.keyCode === enterKeyCode) {
     search();
-  } 
+  }
   searchString = e.target.value.toLowerCase();
 });
 
@@ -80,7 +80,9 @@ const listView = () => {
 
 const displayUsers = (data) => {
   let newUserList = data.reduce((str, el) => {
-    return str +  `
+    return (
+      str +
+      `
             <div class="users__card-${viewState}">
               <div class="users__personal-info-${viewState}">
                   <img src="./assets/user-list/${el.avatar}" alt="aleh">
@@ -99,9 +101,9 @@ const displayUsers = (data) => {
                   </div>
               </div>
             </div>
-          `;
-    
-  }, '');
+          `
+    );
+  }, "");
   userListBlock.innerHTML = newUserList;
   userCounter.innerHTML = `${data.length} employers displayed`;
 };
