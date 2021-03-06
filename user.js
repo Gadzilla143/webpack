@@ -1,6 +1,7 @@
 const userInfBlock = document.getElementById("user-inf-general")
 const userInf = document.getElementById("user-inf")
 
+// Запрашиваем информацию о выбранном пользователе (id хранится в localStorage)
 const getUser = () => {
   const request = new XMLHttpRequest();
   request.open(
@@ -17,7 +18,7 @@ const getUser = () => {
       if (this.status >= 200 && this.status < 400) {
         displayUserInformation(JSON.parse(this.responseText));
       } else {
-        alert("ERROR");
+        alert(this.status + ': ' + this.statusText);
       }
     }
   };
@@ -133,6 +134,5 @@ const displayUserInformation = (data) => {
         </div>
     `;
 }
-
 
 getUser();

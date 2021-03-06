@@ -8,7 +8,7 @@ const userInformation = document.getElementById("user_inf")
 let sortState = 'name';
 let searchString = "";
 let viewState = "grid";
-let userList = ''
+let userList = {}
 
 searchBar.addEventListener("keyup", (e) => {
   if (e.keyCode === enterKeyCode) {
@@ -17,6 +17,7 @@ searchBar.addEventListener("keyup", (e) => {
   searchString = e.target.value.toLowerCase();
 });
 
+// Запрашиваем массив пользователей с параметрами сортировки и фильтрации
 const getUsers = () => {
   const url = new URL("http://127.0.0.1:3000/user_list");
   url.searchParams.set("filterBy", searchString);
@@ -32,13 +33,14 @@ const getUsers = () => {
       if (this.status >= 200 && this.status < 400) {
         displayUsers(JSON.parse(this.responseText));
       } else {
-        alert("ERROR");
+        alert(this.status + ': ' + this.statusText);
       }
     }
   };
   request.send(this.responseText);
 };
 
+// Запоминаем id выбранного пользователя
 const pickUser = (id) => {
   localStorage.setItem('userId', id)
 }
@@ -92,7 +94,5 @@ const displayUsers = (data) => {
   userListBlock.innerHTML = newUserList;
   userCounter.innerHTML = `${data.length} employers displayed`;
 };
-
-
 
 getUsers();

@@ -6,7 +6,6 @@ const { userList } = require("./userList");
 
 http
   .createServer((req, res) => {
-    const queryObject = url.parse(req.url, true).query || "";
     const path = url.parse(req.url, true).pathname;
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
@@ -14,6 +13,7 @@ http
       "origin, content-type, accept"
     );
     if (path === "/user_list") {
+      const queryObject = url.parse(req.url, true).query || "";
       const filteredUsers = userController.getUsers(
         userList,
         queryObject.filterBy,
