@@ -8,13 +8,11 @@ http
   .createServer((req, res) => {
     const queryObject = url.parse(req.url, true).query || "";
     const path = url.parse(req.url, true).pathname;
-
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
       "Access-Control-Allow-Headers",
       "origin, content-type, accept"
     );
-
     if (path === "/user_list") {
       const filteredUsers = userController.getUsers(
         userList,
@@ -22,6 +20,10 @@ http
         queryObject.sortBy
       );
       res.end(JSON.stringify(filteredUsers));
+    } else {
+      const id = req.url.split("/")[2];
+      console.log(userList.find(el => el.id == id))
+      res.end(JSON.stringify(userList.find(el => el.id == id)));
     }
   })
   .listen(3000, "127.0.0.1");

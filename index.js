@@ -3,6 +3,7 @@ const enterKeyCode = 13;
 const userListBlock = document.getElementById("container");
 const searchBar = document.getElementById("searchBar");
 const userCounter = document.getElementById("user-counter");
+const userInformation = document.getElementById("user_inf")
 
 let sortState = 'name';
 let searchString = "";
@@ -38,6 +39,10 @@ const getUsers = () => {
   request.send(this.responseText);
 };
 
+const pickUser = (id) => {
+  localStorage.setItem('userId', id)
+}
+
 const sortByName = () => {
   sortState = "name";
   getUsers();
@@ -46,6 +51,11 @@ const sortByName = () => {
 const sortByNativeName = () => {
   sortState = "nativeName";
   getUsers();
+};
+
+const gridView = () => {
+  viewState = "grid";
+  displayUsers(userList);
 };
 
 const listView = () => {
@@ -58,30 +68,31 @@ const displayUsers = (data) => {
   let newUserList = data.reduce((str, el) => {
     return (
       str +
-      `
-            <div class="users__card-${viewState}">
-              <div class="users__personal-info-${viewState}">
-                  <img src="./assets/user-list/${el.avatar}" alt="aleh">
-                  <h2>${el.name}</h2>
-                  <p>${el.nativeName}</p>
-              </div>
-              <div class="users__work-info-${viewState}">
-                  <div class="users__department">
-                      <img src="./assets/case.svg" alt="aleh">
-                      ${el.department}
-                  </div>
-
-                  <div class="users__room">
-                      <img src="./assets/door.svg" alt="aleh">
-                      ${el.room}
-                  </div>
-              </div>
+        `
+          <a href="user.html" onclick="pickUser(${el.id})" class="users__card-${viewState}">
+            <div class="users__personal-info-${viewState}">
+                <img src="./assets/user-list/${el.avatar}" alt="aleh">
+                <h2>${el.name}</h2>
+                <p>${el.nativeName}</p>
             </div>
-          `
+            <div class="users__work-info-${viewState}">
+                <div class="users__department">
+                    <img src="./assets/case.svg" alt="aleh">
+                    ${el.department}
+                </div>
+                <div class="users__room">
+                    <img src="./assets/door.svg" alt="aleh">
+                    ${el.room}
+                </div>
+            </div>
+          </a>
+        `
     );
   }, "");
   userListBlock.innerHTML = newUserList;
   userCounter.innerHTML = `${data.length} employers displayed`;
 };
+
+
 
 getUsers();
