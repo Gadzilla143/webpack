@@ -185,8 +185,25 @@ body {
 .view-toggle {
     width: 70px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around;   
+}
+
+.sort-toggle {
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
     
+}
+
+.sort-toggle__element {
+    border-bottom: 2px solid rgb(81, 152, 194);
+    transition: .2s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.sort-toggle__element:hover {
+    transform: scale(1.2);
 }
 
 .view-toggle img {
@@ -200,7 +217,7 @@ body {
 }
 
 .users__card-grid {
-    width: 32.08%;
+    width: 31.90%;
     height: 250px;
     margin-right: 7px;
     margin-bottom: 7px;
@@ -296,4 +313,16 @@ body {
 .users__work-info-list {
     width: 40%;
     display: flex;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    transition: .3s;
+    border: 1px solid rgb(81, 152, 194);
+}
+
+a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 28px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0,0,0,0.5);
 }
