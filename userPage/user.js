@@ -36,7 +36,7 @@ const getDate = (data) => {
 
 const displayUserInformation = (data) => {
     userInf.innerHTML = `
-        <img src='./assets/user-list/${data.avatar}'>
+        <img src='${data.avatar}'>
         <p>- ${data.gender} -</p>
         <h2>${data.name}</h2>
         <p>${data.fullName}</p>

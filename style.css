@@ -100,15 +100,30 @@ body {
 .tabs {
     display: flex;
     color: white;
-    width: 170px;
+    width: 220px;
     justify-content: space-between;
 }
 
 .tabs__element {
+    cursor: pointer;
     padding-top: 3px;
     display: flex;
     align-items: center;
     border-bottom: 3px solid rgb(181, 181, 238);
+}
+
+.tabs a {
+    text-decoration: none;
+    color: white;
+    transition: .3s;
+    border: none;
+    border-bottom: 3px solid rgb(181, 181, 238);
+}
+
+.tabs a:hover {
+    box-shadow: none;
+    transform: none;
+    padding-bottom: 8px;
 }
 
 .main {

@@ -71,9 +71,9 @@ const displayUsers = (data) => {
     return (
       str +
         `
-          <a href="user.html" onclick="pickUser(${el.id})" class="users__card-${viewState}">
+          <a href="./userPage/user.html" onclick="pickUser(${el.id})" class="users__card-${viewState}">
             <div class="users__personal-info-${viewState}">
-                <img src="./assets/user-list/${el.avatar}" alt="aleh">
+                <img src="${el.avatar}" alt="aleh">
                 <h2>${el.name}</h2>
                 <p>${el.nativeName}</p>
             </div>
