@@ -4,11 +4,22 @@ const userListBlock = document.getElementById("container");
 const searchBar = document.getElementById("searchBar");
 const userCounter = document.getElementById("user-counter");
 const userInformation = document.getElementById("user_inf")
+const userPanel = document.getElementById("user-panel")
+const popup = document.getElementById("popup-1")
+const userLogin = document.getElementById("login")
+const userPassword = document.getElementById("pass")
+const singIn = document.getElementById("singIn")
 
 let sortState = 'name';
 let searchString = "";
 let viewState = "grid";
-let userList = {}
+let userList = {};
+
+
+singIn.addEventListener('submit', (e) => {
+  e.preventDefault();
+  login()
+})
 
 searchBar.addEventListener("keyup", (e) => {
   if (e.keyCode === enterKeyCode) {
@@ -40,9 +51,26 @@ const getUsers = () => {
   request.send(this.responseText);
 };
 
+const login = () => {
+  if (userList.find(user => user.email === userLogin.value)) {
+    const userId = userList.find(user => user.email === userLogin.value).id - 1;
+    if (userList[userId].password == userPassword.value) {
+      localStorage.setItem('userId', userId)
+      togglePopup()
+      displayUsers(userList)
+      
+    } else {
+      alert("Error: password")
+    }
+  } else {
+    alert("Error: no person with this email")
+  }
+  // console.log(userPassword.value)
+  // console.log(userLogin.value)
+}
 // Запоминаем id выбранного пользователя
 const pickUser = (id) => {
-  localStorage.setItem('userId', id)
+  localStorage.setItem('userPageId', id)
 }
 
 const sortByName = () => {
@@ -65,7 +93,40 @@ const listView = () => {
   displayUsers(userList);
 };
 
+const exit = () => {
+  localStorage.setItem('userId', '')
+  displayUsers(userList)
+}
+
+const togglePopup = () => {
+  popup.classList.toggle("active")
+}
+
 const displayUsers = (data) => {
+  const id = localStorage.getItem("userId")
+  const user = id 
+    ? 
+    `
+    <div class="header__item">
+      <img src='./assets/near.svg' alt="near" />
+    </div>
+    <div class="header__user">
+      <img src='${data[id].avatar}' alt="user" />
+      <h2>${data[id].name}</h2>
+    </div>
+    <div class="header__item">
+      <img onclick='exit()' src='./assets/exit.svg' alt="exit" />
+    </div>
+    `
+    : 
+    `
+    <div class="header__sign btn">
+      Sing Up
+    </div>
+    <div onclick="togglePopup()" class="header__sign btn">
+      Sing In
+    </div
+    `
   userList = data
   let newUserList = data.reduce((str, el) => {
     return (
@@ -91,6 +152,7 @@ const displayUsers = (data) => {
         `
     );
   }, "");
+  userPanel.innerHTML = user;
   userListBlock.innerHTML = newUserList;
   userCounter.innerHTML = `${data.length} employers displayed`;
 };

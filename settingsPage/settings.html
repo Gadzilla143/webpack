@@ -10,6 +10,7 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="../style.css">
     <title>User</title>
 </head>
 
@@ -58,6 +59,22 @@
                 EDIT DETAILS
             </div>
         </div>
+    </div>
+    <div class="popup" id="popup-1">
+        <div class="overlay">
+
+        </div>
+        <div class="content">
+            <div onclick="togglePopup()" class="close-btn">&times;</div>
+            <h2>LOGIN</h2>
+            <form class="singIn" id="singIn" action="">
+                <input id="login" type="email" placeholder="email" required/>
+                <input id="pass" type="password" placeholder="password" required/>
+                <button>login</button>
+            </form>
+            
+        </div>
+
     </div>
     <script src="settings.js"></script>
 </body>

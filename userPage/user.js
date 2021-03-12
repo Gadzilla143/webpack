@@ -6,7 +6,7 @@ const getUser = () => {
   const request = new XMLHttpRequest();
   request.open(
     "GET",
-    "http://127.0.0.1:3000/user/" + localStorage.getItem("userId"),
+    "http://127.0.0.1:3000/user/" + localStorage.getItem("userPageId"),
     true
   );
   request.setRequestHeader(
