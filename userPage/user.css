@@ -1,129 +1,122 @@
-
-
-
-
 .main {
-    padding-top: 22px;
-    display: flex;
-    justify-content: center;
+  padding-top: 22px;
+  display: flex;
+  justify-content: center;
 }
 
 .main-wrapper {
-    width: 1000px;
-    display: flex;
+  width: 1000px;
+  display: flex;
 }
 
 .main-wrapper img {
-    width: 20px;
-    height: 20px;
-    padding: 10px;
-    border-radius: 32px;
-    background-color: rgb(209, 209, 209);
-    transition: .3s;
+  width: 20px;
+  height: 20px;
+  padding: 10px;
+  border-radius: 32px;
+  background-color: rgb(209, 209, 209);
+  transition: 0.3s;
 }
 
 .back:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .user-inf {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 350px;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 350px;
 }
 
 .user-inf img {
-    padding: 0;
-    border-radius: 220px;
-    width: 220px;
-    height: 220px;
+  padding: 0;
+  border-radius: 220px;
+  width: 220px;
+  height: 220px;
 }
 
 .user-inf p {
-    color: rgb(136, 136, 136);
+  color: rgb(136, 136, 136);
 }
 
 .user-inf__btn {
-    display: flex;
-    width: 150px;
-    justify-content: space-between;
+  display: flex;
+  width: 150px;
+  justify-content: space-between;
 }
 
 .user-inf__btn p {
-    border-radius: 12px ;
-    padding: 8px;
-    background-color: rgb(255, 255, 255);
-    cursor: pointer;
-    transition: .3s;
+  border-radius: 12px;
+  padding: 8px;
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .user-inf__btn p:hover {
-    transform: scale(1.15);
+  transform: scale(1.15);
 }
 
 .user-general-inf {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 120%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 120%;
 }
 
 .user-general-inf h2 {
-    color: rgb(145, 145, 145);
-    font-size: 20px;
+  color: rgb(145, 145, 145);
+  font-size: 20px;
 }
 
 .user-general-inf__block {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 30%;
-    padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 30%;
+  padding-bottom: 20px;
 }
 
 .user-general-inf hr {
-    width: 450px;
+  width: 450px;
 }
 
 .field {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
 }
 
-.field h5{
-    width: 180px;
-    display: flex;
-    text-align: left;
+.field h5 {
+  width: 180px;
+  display: flex;
+  text-align: left;
 }
 
-.field p{
-    width: 120px;
-    display: flex;
-    text-align: left;
+.field p {
+  width: 120px;
+  display: flex;
+  text-align: left;
 }
 
 .btn {
-    color:rgb(0, 0, 247);
-    margin-left: 20px ;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    width: 100px;
-    background-color: white;
-    height: 35px;
-    transition: .3s;
-    cursor: pointer;
+  color: rgb(0, 0, 247);
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  width: 100px;
+  background-color: white;
+  height: 35px;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .btn:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
-
-
-  

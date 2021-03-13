@@ -87,11 +87,31 @@
             <div onclick="togglePopup()" class="close-btn">&times;</div>
             <h2>LOGIN</h2>
             <form class="singIn" id="singIn" action="">
-                <input id="login" type="email" placeholder="email" required/>
-                <input id="pass" type="password" placeholder="password" required/>
+                <input id="login" type="email" placeholder="email" required />
+                <input id="pass" type="password" placeholder="password" required />
                 <button>login</button>
             </form>
-            
+
+        </div>
+
+    </div>
+
+    <div class="popup" id="popup-2">
+        <div class="overlay">
+
+        </div>
+        <div class="reg-content">
+            <div onclick="toggleRegister()" class="close-btn">&times;</div>
+            <h2>Register</h2>
+            <form action="http://127.0.0.1:3000/reg" class="singUp" id="singUp" method="POST">
+                <input id="regEmail" type="email" placeholder="Email" required />
+                <input id="regPass" type="password" placeholder="Password" required />
+                <input id="regName" type="text" placeholder="Name" required />
+                <input id="regSecName" type="text" placeholder="Surname" required />
+                <input id="regAvatar" type="text" placeholder="Avatar Url" required />
+                <button>login</button>
+            </form>
+
         </div>
 
     </div>
