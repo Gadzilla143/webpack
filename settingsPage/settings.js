@@ -3,21 +3,21 @@ const popup = document.getElementById("popup-1");
 const userLogin = document.getElementById("login");
 const userPassword = document.getElementById("pass");
 const singIn = document.getElementById("singIn");
-const usersInf = document.getElementById("users-inf")
+const usersInf = document.getElementById("users-inf");
 
-const singUp = document.getElementById("singUp")
+const singUp = document.getElementById("singUp");
 const register = document.getElementById("popup-2");
-const regEmail = document.getElementById("regEmail")
-const regPass = document.getElementById("regPass")
-const regName = document.getElementById("regName")
+const regEmail = document.getElementById("regEmail");
+const regPass = document.getElementById("regPass");
+const regName = document.getElementById("regName");
 
 let userList = [];
-let userListUnFiltered = ''
+let userListUnFiltered = "";
 
 singUp.addEventListener("submit", (e) => {
   e.preventDefault();
   setUsers();
-})
+});
 
 singIn.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -25,7 +25,7 @@ singIn.addEventListener("submit", (e) => {
 });
 
 searchBar.addEventListener("keyup", (e) => {
-  getUsers(e.target.value.toLowerCase())
+  getUsers(e.target.value.toLowerCase());
 });
 
 const setUsers = () => {
@@ -42,17 +42,16 @@ const setUsers = () => {
   request.onreadystatechange = function () {
     if (this.readyState === 4) {
       if (this.status >= 200 && this.status < 400) {
-        
         displayUsers(JSON.parse(this.responseText));
         displayUserPanel(JSON.parse(this.responseText));
-        userListUnFiltered = JSON.parse(this.responseText)
+        userListUnFiltered = JSON.parse(this.responseText);
       } else {
         alert(this.status + ": " + this.statusText);
       }
     }
   };
   request.send(this.responseText);
-  toggleRegister()
+  toggleRegister();
 };
 
 const getUsers = (searchString = "") => {
@@ -67,9 +66,8 @@ const getUsers = (searchString = "") => {
   request.onreadystatechange = function () {
     if (this.readyState === 4) {
       if (this.status >= 200 && this.status < 400) {
-        displayUsers(JSON.parse(this.responseText))
-        displayUserPanel(JSON.parse(this.responseText))
-        
+        displayUsers(JSON.parse(this.responseText));
+        displayUserPanel(JSON.parse(this.responseText));
       } else {
         alert(this.status + ": " + this.statusText);
       }
@@ -80,10 +78,10 @@ const getUsers = (searchString = "") => {
 
 const login = () => {
   if (userList.find((user) => user.email === userLogin.value)) {
-    const userId =
-      userList.find((user) => user.email === userLogin.value).id - 1;
+    const userId = userList.findIndex((user) => user.email === userLogin.value);
     if (userList[userId].password == userPassword.value) {
-      localStorage.setItem("userId", userId);
+      localStorage.setItem("userId", userList[userId].id);
+      localStorage.setItem("userRole", userList[userId].role);
       togglePopup();
       displayUserPanel(userList);
     } else {
@@ -101,7 +99,32 @@ const pickUser = (id) => {
 
 const exit = () => {
   localStorage.setItem("userId", "");
-  displayUserPanel(userList);
+  localStorage.setItem("userRole", "Employee");
+};
+
+const changeRole = (id, role) => {
+  if (localStorage.getItem("userRole") == "Admin") {
+    const url = new URL("http://127.0.0.1:3000/change_role");
+    url.searchParams.set("id", id);
+    url.searchParams.set("role", role);
+    const request = new XMLHttpRequest();
+    request.open("GET", url, true);
+    request.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded; charset=UTF-8"
+    );
+    request.onreadystatechange = function () {
+      if (this.readyState === 4) {
+        if (this.status >= 200 && this.status < 400) {
+          displayUsers(JSON.parse(this.responseText));
+          displayUserPanel(JSON.parse(this.responseText));
+        } else {
+          alert(this.status + ": " + this.statusText);
+        }
+      }
+    };
+    request.send(this.responseText);
+  }
 };
 
 const togglePopup = () => {
@@ -109,15 +132,16 @@ const togglePopup = () => {
 };
 
 const toggleRegister = () => {
-  register.classList.toggle("active")
-}
+  register.classList.toggle("active");
+};
 
 const displayUserPanel = (data) => {
-
-  if (!userListUnFiltered) {userListUnFiltered = data}
+  if (!userListUnFiltered) {
+    userListUnFiltered = data;
+  }
   const id = localStorage.getItem("userId");
   const user = userListUnFiltered.find(
-    (user) => user.id == +localStorage.getItem("userId") + 1
+    (user) => user.id == localStorage.getItem("userId")
   );
   userPanel.innerHTML = id
     ? `
@@ -128,9 +152,9 @@ const displayUserPanel = (data) => {
       <img src='${user.avatar}' alt="user" />
       <h2>${user.name}</h2>
     </a>
-    <div class="header__item">
+    <a href="../index.html" class="header__item">
       <img onclick='exit()' src='../assets/exit.svg' alt="exit" />
-    </div>
+    </a>
     `
     : `
     <div onclick="toggleRegister()" class="header__sign btn">
@@ -146,16 +170,15 @@ const displayUsers = (data) => {
   userList = data;
 
   let newUserList = data.reduce((str, el, i) => {
-    let style = i%2 ? 'even' : ''
-    let role = ''
+    let style = i % 2 ? "even" : "";
+    let role = "";
     if (el.role === "Admin") {
-      role = 
-      `
+      role = `
       <div class="users-inf__role" style="width: 248px;">
-        <div class="role">
+        <div onclick="changeRole(${el.id}, 'Employee')" class="role">
             EMPLOYEE
         </div>
-        <div class="role">
+        <div onclick="changeRole(${el.id}, 'Hr')" class="role">
             HR
         </div>
       </div>
@@ -170,20 +193,19 @@ const displayUsers = (data) => {
           DD
         </div>
       </div>
-      <div class="users-inf__role" style="width: 143px;">
-        <div class="role active">
+      <div  class="users-inf__role" style="width: 143px;">
+        <div onclick="changeRole(${el.id}, 'Admin')" class="role active">
           ADMIN
         </div>
       </div>
-      `
+      `;
     } else if (el.role === "Employee") {
-      role = 
-      `
+      role = `
       <div class="users-inf__role" style="width: 248px;">
-        <div class="role active">
+        <div onclick="changeRole(${el.id}, 'Employee')" class="role active">
             EMPLOYEE
         </div>
-        <div class="role">
+        <div onclick="changeRole(${el.id}, 'Hr')" class="role">
             HR
         </div>
       </div>
@@ -199,19 +221,18 @@ const displayUsers = (data) => {
         </div>
       </div>
       <div class="users-inf__role" style="width: 143px;">
-        <div class="role">
+        <div onclick="changeRole(${el.id}, 'Admin')" class="role">
           ADMIN
         </div>
       </div>
-      `
+      `;
     } else {
-      role = 
-      `
+      role = `
       <div class="users-inf__role" style="width: 248px;">
-        <div class="role">
+        <div onclick="changeRole(${el.id}, 'Employee')" class="role">
             EMPLOYEE
         </div>
-        <div class="role active">
+        <div onclick="changeRole(${el.id}, 'Hr')" class="role active">
             HR
         </div>
       </div>
@@ -226,12 +247,12 @@ const displayUsers = (data) => {
           DD
         </div>
       </div>
-      <div class="users-inf__role" style="width: 143px;">
+      <div onclick="changeRole(${el.id}, 'Admin')" class="users-inf__role" style="width: 143px;">
         <div class="role">
           ADMIN
         </div>
       </div>
-      `
+      `;
     }
     return (
       str +
@@ -248,7 +269,6 @@ const displayUsers = (data) => {
       </div>
         `
     );
-    
   }, "");
   usersInf.innerHTML = newUserList;
 };

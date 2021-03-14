@@ -214,6 +214,11 @@ http
         queryObject.sortBy
       );
       res.end(JSON.stringify(filteredUsers));
+    } else if (path === "/change_role") {
+      const queryObject = url.parse(req.url, true).query || "";
+      const userId = userList.findIndex((user) => user.id == queryObject.id);
+      userList[userId].role = queryObject.role;
+      res.end(JSON.stringify(userList));
     } else if (path === "/user_role") {
       const queryObject = url.parse(req.url, true).query || "";
       const filteredUsers = userController.filteredUsersByRole(
@@ -249,13 +254,13 @@ http
           {
             start_date: 1561932200000,
             working_day_duration: 2,
-          }
+          },
         ],
         vacantion: "Enabled",
         address_book_redesign: "Enabled",
         gender: "Mr",
       });
-     
+
       res.end(JSON.stringify(userList));
     } else {
       const id = req.url.split("/")[2];

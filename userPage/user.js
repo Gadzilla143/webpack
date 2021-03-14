@@ -2,6 +2,8 @@ const userInfBlock = document.getElementById("user-inf-general");
 const userInf = document.getElementById("user-inf");
 const userPanel = document.getElementById("user-panel");
 const popup = document.getElementById("popup-1");
+const settings = document.getElementById("settings");
+const edit = document.getElementById("edit");
 
 const userLogin = document.getElementById("login");
 const userPassword = document.getElementById("pass");
@@ -74,10 +76,10 @@ const getUsers = () => {
 
 const login = () => {
   if (userList.find((user) => user.email === userLogin.value)) {
-    const userId =
-      userList.find((user) => user.email === userLogin.value).id - 1;
+    const userId = userList.findIndex((user) => user.email === userLogin.value);
     if (userList[userId].password == userPassword.value) {
-      localStorage.setItem("userId", userId);
+      localStorage.setItem("userId", userList[userId].id);
+      localStorage.setItem("userRole", userList[userId].role);
       togglePopup();
       displayUserPanel(userList);
     } else {
@@ -90,6 +92,7 @@ const login = () => {
 
 const exit = () => {
   localStorage.setItem("userId", "");
+  localStorage.setItem("userRole", "Employee");
   displayUserPanel(userList);
 };
 
@@ -131,7 +134,6 @@ const pickUser = (id) => {
 };
 
 const getDate = (data) => {
-  
   if (data) {
     const date = new Date(data);
     return (
@@ -143,16 +145,22 @@ const getDate = (data) => {
       date.getFullYear()
     );
   } else {
-    return data
+    return data;
   }
 };
 
 const displayUserPanel = (data) => {
+  if (localStorage.getItem("userRole") === "Employee") {
+    settings.classList.add("hide");
+    edit.classList.add("hide");
+  } else {
+    settings.classList.remove("hide");
+    edit.classList.remove("hide");
+  }
+
   userList = data;
   const id = localStorage.getItem("userId");
-  const user = data.find(
-    (user) => user.id == +localStorage.getItem("userId") + 1
-  );
+  const user = data.find((user) => user.id == localStorage.getItem("userId"));
   userPanel.innerHTML = id
     ? `
     <div class="header__item">
@@ -177,7 +185,6 @@ const displayUserPanel = (data) => {
 };
 
 const displayUserInformation = (data) => {
-  
   userInf.innerHTML = `
         <img src='${data.avatar}'>
         <p>- ${data.gender} -</p>

@@ -1,12 +1,10 @@
 function getUsers(users, param, sort) {
   if (!param) {
-    return (
-      users
-        .sort(function (a, b) {
-          if (a[sort] < b[sort]) return -1;
-          if (a[sort] > b[sort]) return 1;
-        return 0;
-    }))
+    return users.sort(function (a, b) {
+      if (a[sort] < b[sort]) return -1;
+      if (a[sort] > b[sort]) return 1;
+      return 0;
+    });
   } else {
     return (
       users
@@ -32,9 +30,7 @@ function filteredUsersByRole(users, param) {
     users
       // Поиск
       .filter((user) => {
-        return (
-          user.role.toLowerCase().includes(param) 
-        );
+        return user.role.toLowerCase().includes(param);
       })
   );
 }

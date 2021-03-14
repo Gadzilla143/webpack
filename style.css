@@ -106,6 +106,7 @@ body {
 }
 
 .tabs__element {
+  visibility: visible;
   cursor: pointer;
   padding-top: 3px;
   display: flex;
@@ -125,6 +126,10 @@ body {
   box-shadow: none;
   transform: none;
   padding-bottom: 8px;
+}
+
+.hide {
+  visibility: hidden;
 }
 
 .header__sign {
@@ -151,8 +156,6 @@ a {
 }
 
 /* MAIN */
-
-
 
 /* POPUP   */
 
@@ -197,7 +200,6 @@ a {
   border-radius: 10px;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
-  
 }
 
 .popup .close-btn {

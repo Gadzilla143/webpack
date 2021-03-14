@@ -6,6 +6,7 @@ const userCounter = document.getElementById("user-counter");
 const userInformation = document.getElementById("user_inf");
 const userPanel = document.getElementById("user-panel");
 const popup = document.getElementById("popup-1");
+const settings = document.getElementById("settings");
 
 const userLogin = document.getElementById("login");
 const userPassword = document.getElementById("pass");
@@ -54,7 +55,6 @@ const setUsers = () => {
   request.onreadystatechange = function () {
     if (this.readyState === 4) {
       if (this.status >= 200 && this.status < 400) {
-        
         displayUsers(JSON.parse(this.responseText));
         displayUserPanel(JSON.parse(this.responseText));
         userListUnFiltered = JSON.parse(this.responseText);
@@ -93,10 +93,11 @@ const getUsers = () => {
 
 const login = () => {
   if (userList.find((user) => user.email === userLogin.value)) {
-    const userId =
-      userList.find((user) => user.email === userLogin.value).id - 1;
+    const userId = userList.findIndex((user) => user.email === userLogin.value);
+    console.log(userId);
     if (userList[userId].password == userPassword.value) {
-      localStorage.setItem("userId", userId);
+      localStorage.setItem("userId", userList[userId].id);
+      localStorage.setItem("userRole", userList[userId].role);
       togglePopup();
       displayUsers(userList);
       displayUserPanel(userList);
@@ -135,6 +136,7 @@ const listView = () => {
 
 const exit = () => {
   localStorage.setItem("userId", "");
+  localStorage.setItem("userRole", "Employee");
   displayUserPanel(userList);
 };
 
@@ -148,12 +150,17 @@ const toggleRegister = () => {
 };
 
 const displayUserPanel = (data) => {
+  if (localStorage.getItem("userRole") === "Employee") {
+    settings.classList.add("hide");
+  } else {
+    settings.classList.remove("hide");
+  }
   if (!userListUnFiltered) {
     userListUnFiltered = data;
   }
   const id = localStorage.getItem("userId");
   const user = userListUnFiltered.find(
-    (user) => user.id == +localStorage.getItem("userId") + 1
+    (user) => user.id == localStorage.getItem("userId")
   );
   userPanel.innerHTML = id
     ? `
