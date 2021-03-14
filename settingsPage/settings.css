@@ -1,2 +1,108 @@
+.main {
+  padding-top: 22px;
+  display: flex;
+  justify-content: center;
+}
 
+.main-wrapper {
+  width: 1000px;
+  display: flex;
+}
 
+.roles-block {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 0 5px 3px rgb(218, 218, 218);
+    width: 100%;
+}
+
+.logo {
+    color: rgb(148, 148, 148);
+    padding: 25px;
+}
+
+.roles-block hr {
+    color: rgb(240, 240, 240);
+}
+
+.roles-block__panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 80px;
+}
+
+.roles-block__panel hr {
+    color: rgb(240, 240, 240);
+    width: 30px;
+    transform: rotate(90deg)
+}
+
+h5 {
+    color: rgb(92, 92, 92);
+    display: flex;
+    text-align: end;
+}
+
+input {
+    padding: 10px;
+    width: 170px;
+    height: 10px;
+    border: solid rgb(214, 214, 214) 2px;
+    border-radius: 3px;
+}
+
+.users-inf {
+    
+}
+
+.user {
+    display: flex;
+    height: 80px;
+    align-items: center;
+    background-color: rgb(235, 235, 235)
+    
+}
+
+.even {
+    background-color: rgb(255, 255, 255)
+}
+
+.user-inf__img-name {
+    width: 240px;
+    display: flex;
+    padding-left: 20px;
+}
+
+.user-inf__img-name img {
+
+    width: 45px;
+    height: 45px;
+    border-radius: 30px;
+}
+
+.user-inf__name {
+    padding-left: 20px;
+}
+
+.users-inf__role {
+    
+    display: flex;
+    justify-content: center;
+}
+
+.role {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px rgb(202, 202, 202);
+    border-radius: 1px;
+    width: 85px;
+    height: 30px;
+    letter-spacing: 2px;
+}
+
+.active {
+    color: white;
+    background-color: rgb(77, 127, 233);
+}

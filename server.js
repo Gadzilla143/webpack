@@ -4,6 +4,7 @@ const userList = [
     name: "Dzmitry Gordon",
     nativeName: "Дмитрий Гордон",
     department: "Web & Mobile",
+    role: "Admin",
     avatar:
       "https://i1.sndcdn.com/artworks-7yHR0xGSzLgPu5AL-OUzjfA-t500x500.jpg",
     room: "1608",
@@ -35,6 +36,7 @@ const userList = [
     name: "Aleh Zhukau",
     nativeName: "Олег Жуков",
     department: "Web & Mobile",
+    role: "Employee",
     avatar:
       "https://kcsmile.com/wp-content/uploads/2017/05/canstockphoto2083668-min.jpg",
     room: "1608",
@@ -66,6 +68,7 @@ const userList = [
     name: "Maxim Podolsky",
     nativeName: "Максим Подольский",
     department: "Web & Mobile",
+    role: "Employee",
     avatar:
       "https://pbs.twimg.com/profile_images/562876953997221888/fdrVbVYU.jpeg",
     room: "1608",
@@ -97,6 +100,7 @@ const userList = [
     name: "Anna Belova",
     nativeName: "Анна Белова",
     department: "Web & Mobile",
+    role: "Hr",
     avatar: "http://pompa.zshop.kz/lander/amst_black/ava3.jpg",
     room: "1608",
     employee_id: "225",
@@ -127,6 +131,7 @@ const userList = [
     name: "Vitaliy Vlasov",
     nativeName: "Виталий Власов",
     department: "Web & Mobile",
+    role: "Employee",
     avatar:
       "https://pbs.twimg.com/profile_images/1262549910190198785/Mq_bcT1f.jpg",
     room: "1608",
@@ -158,6 +163,7 @@ const userList = [
     name: "Zhmashenko Valeriy",
     nativeName: "Жмышенко Валерий",
     department: "Web & Mobile",
+    role: "Admin",
     avatar:
       "https://www.meme-arsenal.com/memes/1de8fd7b3ea843febb7941e0ad21517d.jpg",
     room: "1608",
@@ -199,19 +205,20 @@ http
       "Access-Control-Allow-Headers",
       "origin, content-type, accept"
     );
-    if (req.method == 'POST') {
-      let form = new formidable.IncomingForm();
-      form.parse(req, function(err, fields, files) {
-        console.log(fields);
-        });
-        res.end()
-    }
+    
     if (path === "/user_list") {
       const queryObject = url.parse(req.url, true).query || "";
       const filteredUsers = userController.getUsers(
         userList,
         queryObject.filterBy,
         queryObject.sortBy
+      );
+      res.end(JSON.stringify(filteredUsers));
+    } else if (path === "/user_role" ) {
+      const queryObject = url.parse(req.url, true).query || "";
+      const filteredUsers = userController.filteredUsersByRole(
+        userList,
+        queryObject.filterBy
       );
       res.end(JSON.stringify(filteredUsers));
     } else {

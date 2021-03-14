@@ -11,6 +11,7 @@ const userLogin = document.getElementById("login");
 const userPassword = document.getElementById("pass");
 const singIn = document.getElementById("singIn");
 
+const singUp = document.getElementById("singUp")
 const register = document.getElementById("popup-2");
 
 
@@ -18,6 +19,12 @@ let sortState = "name";
 let searchString = "";
 let viewState = "grid";
 let userList = [];
+let userListUnFiltered = ''
+
+singUp.addEventListener("submit", (e) => {
+  e.preventDefault();
+  setUsers();
+})
 
 singIn.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -32,26 +39,7 @@ searchBar.addEventListener("keyup", (e) => {
 });
 
 const setUsers = () => {
-  const url = new URL("http://127.0.0.1:3000/users");
-  const request = new XMLHttpRequest();
-  request.open("PUT", url, true);
-  request.setRequestHeader(
-    "Content-Type",
-    "application/x-www-form-urlencoded; charset=UTF-8"
-  );
-  request.onreadystatechange = function () {
-    if (this.readyState === 4) {
-      if (this.status >= 200 && this.status < 400) {
-        displayUsers(JSON.parse(this.responseText));
-        displayUserPanel(JSON.parse(this.responseText));
-      } else {
-        alert(this.status + ": " + this.statusText);
-      }
-    }
-  };
-  request.send(
-    "Sadasd"
-  );
+  alert("ERROR")
 };
 
 // Запрашиваем массив пользователей с параметрами сортировки и фильтрации
@@ -132,13 +120,14 @@ const togglePopup = () => {
 };
 
 const toggleRegister = () => {
-  setUsers()
+  
   register.classList.toggle("active")
 }
 
 const displayUserPanel = (data) => {
+  if (!userListUnFiltered) {userListUnFiltered = data}
   const id = localStorage.getItem("userId")
-  const user = data.find(user => user.id == +localStorage.getItem("userId") + 1)
+  const user = userListUnFiltered.find(user => user.id == +localStorage.getItem("userId") + 1)
 
   userPanel.innerHTML = id
     ? `

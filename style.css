@@ -13,7 +13,7 @@ body {
 .header {
   top: 0;
   position: sticky;
-  background-color: rgb(66, 68, 202);
+  background-color: rgb(46, 88, 179);
   height: 70px;
   display: flex;
   justify-content: center;
@@ -149,6 +149,10 @@ a {
   color: black;
   transition: 0.3s;
 }
+
+/* MAIN */
+
+
 
 /* POPUP   */
 
