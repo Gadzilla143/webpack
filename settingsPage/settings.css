@@ -52,10 +52,6 @@ input {
     border-radius: 3px;
 }
 
-.users-inf {
-    
-}
-
 .user {
     display: flex;
     height: 80px;

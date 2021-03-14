@@ -57,9 +57,26 @@
             <div onclick="togglePopup()" class="close-btn">&times;</div>
             <h2>LOGIN</h2>
             <form class="singIn" id="singIn" action="">
-                <input id="login" type="email" placeholder="email" required />
-                <input id="pass" type="password" placeholder="password" required />
+                <input id="login" type="email" placeholder="Email" required />
+                <input id="pass" type="password" placeholder="Password" required />
                 <button>login</button>
+            </form>
+
+        </div>
+
+    </div>
+    <div class="popup" id="popup-2">
+        <div class="overlay">
+
+        </div>
+        <div class="reg-content">
+            <div onclick="toggleRegister()" class="close-btn">&times;</div>
+            <h2>Register</h2>
+            <form action="" class="singUp" id="singUp">
+                <input id="regEmail" type="email" placeholder="Email" required />
+                <input id="regPass" type="password" placeholder="Password" required />
+                <input id="regName" type="text" placeholder="Name" required />
+                <button>Register</button>
             </form>
 
         </div>

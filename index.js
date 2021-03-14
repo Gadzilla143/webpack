@@ -11,20 +11,22 @@ const userLogin = document.getElementById("login");
 const userPassword = document.getElementById("pass");
 const singIn = document.getElementById("singIn");
 
-const singUp = document.getElementById("singUp")
+const singUp = document.getElementById("singUp");
 const register = document.getElementById("popup-2");
-
+const regEmail = document.getElementById("regEmail");
+const regPass = document.getElementById("regPass");
+const regName = document.getElementById("regName");
 
 let sortState = "name";
 let searchString = "";
 let viewState = "grid";
 let userList = [];
-let userListUnFiltered = ''
+let userListUnFiltered = "";
 
 singUp.addEventListener("submit", (e) => {
   e.preventDefault();
   setUsers();
-})
+});
 
 singIn.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -39,7 +41,30 @@ searchBar.addEventListener("keyup", (e) => {
 });
 
 const setUsers = () => {
-  alert("ERROR")
+  const url = new URL("http://127.0.0.1:3000/user_reg");
+  url.searchParams.set("email", regEmail.value);
+  url.searchParams.set("password", regPass.value);
+  url.searchParams.set("name", regName.value);
+  const request = new XMLHttpRequest();
+  request.open("GET", url, true);
+  request.setRequestHeader(
+    "Content-Type",
+    "application/x-www-form-urlencoded; charset=UTF-8"
+  );
+  request.onreadystatechange = function () {
+    if (this.readyState === 4) {
+      if (this.status >= 200 && this.status < 400) {
+        
+        displayUsers(JSON.parse(this.responseText));
+        displayUserPanel(JSON.parse(this.responseText));
+        userListUnFiltered = JSON.parse(this.responseText);
+      } else {
+        alert(this.status + ": " + this.statusText);
+      }
+    }
+  };
+  request.send(this.responseText);
+  toggleRegister();
 };
 
 // Запрашиваем массив пользователей с параметрами сортировки и фильтрации
@@ -67,7 +92,6 @@ const getUsers = () => {
 };
 
 const login = () => {
-  
   if (userList.find((user) => user.email === userLogin.value)) {
     const userId =
       userList.find((user) => user.email === userLogin.value).id - 1;
@@ -85,7 +109,7 @@ const login = () => {
 };
 // Запоминаем id выбранного пользователя
 const pickUser = (id) => {
-  console.log(id)
+  console.log(id);
   localStorage.setItem("userPageId", id);
 };
 
@@ -109,7 +133,6 @@ const listView = () => {
   displayUsers(userList);
 };
 
-
 const exit = () => {
   localStorage.setItem("userId", "");
   displayUserPanel(userList);
@@ -120,15 +143,18 @@ const togglePopup = () => {
 };
 
 const toggleRegister = () => {
-  
-  register.classList.toggle("active")
-}
+  console.log("asda");
+  register.classList.toggle("active");
+};
 
 const displayUserPanel = (data) => {
-  if (!userListUnFiltered) {userListUnFiltered = data}
-  const id = localStorage.getItem("userId")
-  const user = userListUnFiltered.find(user => user.id == +localStorage.getItem("userId") + 1)
-
+  if (!userListUnFiltered) {
+    userListUnFiltered = data;
+  }
+  const id = localStorage.getItem("userId");
+  const user = userListUnFiltered.find(
+    (user) => user.id == +localStorage.getItem("userId") + 1
+  );
   userPanel.innerHTML = id
     ? `
   <div class="header__item">
@@ -153,9 +179,7 @@ const displayUserPanel = (data) => {
 };
 
 const displayUsers = (data) => {
-  userList = data;  
-  
-
+  userList = data;
   let newUserList = data.reduce((str, el) => {
     return (
       str +

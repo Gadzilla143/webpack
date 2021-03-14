@@ -5,10 +5,19 @@ const userPassword = document.getElementById("pass");
 const singIn = document.getElementById("singIn");
 const usersInf = document.getElementById("users-inf")
 
+const singUp = document.getElementById("singUp")
+const register = document.getElementById("popup-2");
+const regEmail = document.getElementById("regEmail")
+const regPass = document.getElementById("regPass")
+const regName = document.getElementById("regName")
+
 let userList = [];
 let userListUnFiltered = ''
 
-
+singUp.addEventListener("submit", (e) => {
+  e.preventDefault();
+  setUsers();
+})
 
 singIn.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -18,6 +27,33 @@ singIn.addEventListener("submit", (e) => {
 searchBar.addEventListener("keyup", (e) => {
   getUsers(e.target.value.toLowerCase())
 });
+
+const setUsers = () => {
+  const url = new URL("http://127.0.0.1:3000/user_reg");
+  url.searchParams.set("email", regEmail.value);
+  url.searchParams.set("password", regPass.value);
+  url.searchParams.set("name", regName.value);
+  const request = new XMLHttpRequest();
+  request.open("GET", url, true);
+  request.setRequestHeader(
+    "Content-Type",
+    "application/x-www-form-urlencoded; charset=UTF-8"
+  );
+  request.onreadystatechange = function () {
+    if (this.readyState === 4) {
+      if (this.status >= 200 && this.status < 400) {
+        
+        displayUsers(JSON.parse(this.responseText));
+        displayUserPanel(JSON.parse(this.responseText));
+        userListUnFiltered = JSON.parse(this.responseText)
+      } else {
+        alert(this.status + ": " + this.statusText);
+      }
+    }
+  };
+  request.send(this.responseText);
+  toggleRegister()
+};
 
 const getUsers = (searchString = "") => {
   const url = new URL("http://127.0.0.1:3000/user_role");
@@ -72,6 +108,10 @@ const togglePopup = () => {
   popup.classList.toggle("active");
 };
 
+const toggleRegister = () => {
+  register.classList.toggle("active")
+}
+
 const displayUserPanel = (data) => {
 
   if (!userListUnFiltered) {userListUnFiltered = data}
@@ -93,7 +133,7 @@ const displayUserPanel = (data) => {
     </div>
     `
     : `
-    <div class="header__sign btn">
+    <div onclick="toggleRegister()" class="header__sign btn">
       Sing Up
     </div>
     <div onclick="togglePopup()" class="header__sign btn">

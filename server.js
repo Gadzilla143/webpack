@@ -205,7 +205,7 @@ http
       "Access-Control-Allow-Headers",
       "origin, content-type, accept"
     );
-    
+
     if (path === "/user_list") {
       const queryObject = url.parse(req.url, true).query || "";
       const filteredUsers = userController.getUsers(
@@ -214,17 +214,53 @@ http
         queryObject.sortBy
       );
       res.end(JSON.stringify(filteredUsers));
-    } else if (path === "/user_role" ) {
+    } else if (path === "/user_role") {
       const queryObject = url.parse(req.url, true).query || "";
       const filteredUsers = userController.filteredUsersByRole(
         userList,
         queryObject.filterBy
       );
       res.end(JSON.stringify(filteredUsers));
+    } else if (path === "/user_reg") {
+      const queryObject = url.parse(req.url, true).query || "";
+      userList.push({
+        id: userList.length + 1,
+        name: queryObject.name,
+        nativeName: queryObject.name,
+        department: "Web & Mobile",
+        role: "Employee",
+        avatar:
+          "https://yt3.ggpht.com/a/AATXAJwvIVm1ukHh2FvA1XXpxNFwMQZ_sMTmtaYslg=s900-c-k-c0xffffffff-no-rj-mo",
+        room: "1608",
+        employee_id: "223",
+        fullName: queryObject.name,
+        phone: "+375343334343",
+        email: queryObject.email,
+        skype: "dima",
+        password: queryObject.password,
+        cNumber: "C9200001",
+        date_hired: 1561939200000,
+        status: "Active",
+        employment_period: [
+          {
+            start_date: 1561939200000,
+            working_day_duration: 8,
+          },
+          {
+            start_date: 1561932200000,
+            working_day_duration: 2,
+          }
+        ],
+        vacantion: "Enabled",
+        address_book_redesign: "Enabled",
+        gender: "Mr",
+      });
+     
+      res.end(JSON.stringify(userList));
     } else {
       const id = req.url.split("/")[2];
-      console.log(userList.find(el => el.id == id))
-      res.end(JSON.stringify(userList.find(el => el.id == id)));
+      console.log(userList.find((el) => el.id == id));
+      res.end(JSON.stringify(userList.find((el) => el.id == id)));
     }
   })
   .listen(3000, "127.0.0.1");
