@@ -1,3 +1,7 @@
+import '../style.css'
+import './user.css'
+
+
 const userInfBlock = document.getElementById("user-inf-general");
 const userInf = document.getElementById("user-inf");
 const userPanel = document.getElementById("user-panel");

@@ -5,7 +5,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 module.exports = {
     mode: "development",
     entry: {
-        index: './index.js',
+        bundle: './index.js',
         user: './userPage/user.js',
         settings: './settingsPage/settings.js'
     },
@@ -17,7 +17,7 @@ module.exports = {
         new HTMLWebpackPlugin({
             filename: 'index.html',
             template: 'index.html',
-            chunks: ['index']
+            chunks: ['bundle']
         }),
         new HTMLWebpackPlugin({
             filename: 'user.html',
@@ -34,7 +34,12 @@ module.exports = {
     module: {
         rules: [
             {
-                
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(png|jpeg|svg)$/,
+                use: ['file-loader']
             }
         ]
     }

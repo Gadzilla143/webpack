@@ -1,4 +1,7 @@
-// import './style.css'
+// import './style.css';
+// import './index.css';
+// import grid from './assets/grid.svg';
+// import list from './assets/grid.svg';
 
 const enterKeyCode = 13;
 
@@ -57,6 +60,7 @@ const setUsers = () => {
   request.onreadystatechange = function () {
     if (this.readyState === 4) {
       if (this.status >= 200 && this.status < 400) {
+        console.log(this)
         displayUsers(JSON.parse(this.responseText));
         displayUserPanel(JSON.parse(this.responseText));
         userListUnFiltered = JSON.parse(this.responseText);
@@ -83,6 +87,7 @@ const getUsers = () => {
   request.onreadystatechange = function () {
     if (this.readyState === 4) {
       if (this.status >= 200 && this.status < 400) {
+        console.log("SS")
         displayUsers(JSON.parse(this.responseText));
         displayUserPanel(JSON.parse(this.responseText));
       } else {
@@ -111,20 +116,25 @@ const login = () => {
   }
 };
 // Запоминаем id выбранного пользователя
+
 const pickUser = (id) => {
-  
   localStorage.setItem("userPageId", id);
 };
+
 
 const sortByName = () => {
   sortState = "name";
   getUsers();
 };
+document.getElementById("sortByName").addEventListener("onclick", sortByName())
+
 
 const sortByNativeName = () => {
+  console.log(sortState)
   sortState = "nativeName";
   getUsers();
 };
+document.getElementById("sortByNativeName").addEventListener("onclick", sortByNativeName())
 
 const gridView = () => {
   viewState = "grid";
@@ -193,7 +203,7 @@ const displayUsers = (data) => {
     return (
       str +
       `
-          <a href="./userPage/user.html" onclick="pickUser(${el.id})" class="users__card-${viewState}">
+          <a href=".user.html" onclick="pickUser(${el.id})" class="users__card-${viewState}">
             <div class="users__personal-info-${viewState}">
                 <img src="${el.avatar}" alt="aleh">
                 <h2>${el.name}</h2>

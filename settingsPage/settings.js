@@ -1,3 +1,6 @@
+import '../style.css'
+import './settings.css'
+
 const userPanel = document.getElementById("user-panel");
 const popup = document.getElementById("popup-1");
 const userLogin = document.getElementById("login");
