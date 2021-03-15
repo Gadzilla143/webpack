@@ -264,7 +264,7 @@ http
       res.end(JSON.stringify(userList));
     } else {
       const id = req.url.split("/")[2];
-      console.log(userList.find((el) => el.id == id));
+      
       res.end(JSON.stringify(userList.find((el) => el.id == id)));
     }
   })

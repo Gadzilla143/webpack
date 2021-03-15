@@ -93,7 +93,7 @@ const login = () => {
 };
 
 const pickUser = (id) => {
-  console.log(id);
+  
   localStorage.setItem("userPageId", id);
 };
 

@@ -5,21 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="index.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;900&display=swap"
         rel="stylesheet">
-    <title>Document</title>
-</head>
+
+    <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="../style.css">
+    <title>User</title>
+<script defer src="settings.cc0d04c6aeec00953a6c.js"></script></head>
 
 <body>
     <header class="header">
         <div class="header__body">
-            <div class="header__logo">
+            <a href="index.html" class="header__logo">
                 <h5>LEVERX GROUP</h5>
                 <h1>EMPLOYEE SERVICES</h1>
-            </div>
+            </a>
             <div class="tabs">
                 <a class="tabs__element">
                     Address Book
@@ -27,58 +28,42 @@
                 <a class="tabs__element">
                     Leave Requests
                 </a>
-                <a id="settings" href="settings.html" class="tabs__element settings">
+                <a id="settings" href="settings.html" class="tabs__element">
                     Settings
                 </a>
             </div>
             <div id="user-panel" class="header__user-panel">
-
 
             </div>
         </div>
     </header>
     <div class="main">
         <div class="main-wrapper">
-            <div class="search-block">
-                <div class="tabs">
-                    <div class="tabs__element search">
-                        Address Book
-                    </div>
-                    <div class="tabs__element search">
-                        Leave Requests
-                    </div>
-                </div>
 
-                <div class="search-form">
-                    <input class="search-form__input" placeholder="John Smith" id="searchBar" type="text">
-                    <button onclick="getUsers()" type="button" class="search-form__button">SEARCH</button>
+            <div class="roles-block">
+                <div class="logo">
+                    <h3>ROLES & PERMISSIONS</h3>
                 </div>
-            </div>
-
-            <div class="user-list">
-                <div class="user-list__bar">
-                    <div id="user-counter" class="user-list__info">
-                    </div>
-                    <div class="sort-toggle">
-                        <div>Sort by</div>
-                        <div class="sort-toggle__element" onclick="sortByName()">Name</div>
-                        <div class="sort-toggle__element" onclick="sortByNativeName()">Native Name</div>
-                    </div>
-                    <div class="view-toggle">
-                        <img src='./assets/grid.svg' alt="grid_view" onclick="gridView()" />
-                        <img src='./assets/list.svg' alt="list_view" onclick="listView()" />
-                    </div>
+                <hr />
+                <div class="roles-block__panel">
+                    <input class="input" placeholder="Type to search" id="searchBar" type="text">
+                    <hr />
+                    <h5 style="width: 150px;">Address book role</h5>
+                    <hr />
+                    <h5 style="width: 250px;">Vacation role</h5>
+                    <hr />
+                    <h5 style="width: 80px;">Admin</h5>
                 </div>
+                <hr />
+                <div class="users-inf" id="users-inf">
 
-                <div class="users" id="container">
 
                 </div>
             </div>
+
         </div>
-
     </div>
 
-    </div>
     <div class="popup" id="popup-1">
         <div class="overlay">
 
@@ -95,7 +80,6 @@
         </div>
 
     </div>
-
     <div class="popup" id="popup-2">
         <div class="overlay">
 
@@ -113,7 +97,7 @@
         </div>
 
     </div>
-    <script src="index.js"></script>
+    <script src="settings.js"></script>
 </body>
 
 </html>

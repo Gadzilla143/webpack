@@ -101,7 +101,7 @@ const togglePopup = () => {
 };
 
 const toggleRegister = () => {
-  console.log("asda");
+  ;
   register.classList.toggle("active");
 };
 // Запрашиваем информацию о выбранном пользователе (id хранится в localStorage)
@@ -129,7 +129,7 @@ const getUser = () => {
 };
 
 const pickUser = (id) => {
-  console.log(id);
+  
   localStorage.setItem("userPageId", id);
 };
 

@@ -1,3 +1,5 @@
+// import './style.css'
+
 const enterKeyCode = 13;
 
 const userListBlock = document.getElementById("container");
@@ -94,7 +96,7 @@ const getUsers = () => {
 const login = () => {
   if (userList.find((user) => user.email === userLogin.value)) {
     const userId = userList.findIndex((user) => user.email === userLogin.value);
-    console.log(userId);
+    
     if (userList[userId].password == userPassword.value) {
       localStorage.setItem("userId", userList[userId].id);
       localStorage.setItem("userRole", userList[userId].role);
@@ -110,7 +112,7 @@ const login = () => {
 };
 // Запоминаем id выбранного пользователя
 const pickUser = (id) => {
-  console.log(id);
+  
   localStorage.setItem("userPageId", id);
 };
 
@@ -145,7 +147,7 @@ const togglePopup = () => {
 };
 
 const toggleRegister = () => {
-  console.log("asda");
+  
   register.classList.toggle("active");
 };
 
