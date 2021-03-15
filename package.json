@@ -1,0 +1,16 @@
+{
+  "name": "kirkouski.yahor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://edu-gitlab.leverx-group.com/march2021/kirkouski.yahor.git"
+  },
+  "author": "Kirkouski Yahor <egor1231232@gmail.com>",
+  "license": "ISC"
+}
